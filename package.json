@@ -1,0 +1,22 @@
+{
+  "name": "promo-flag-service",
+  "version": "1.0.0",
+  "description": "An orchestration & circuit-breaking feature flag service built to isolate blast radiuses and protect core storefront transaction flows during high-scale e-commerce promotions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "peter-coker",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "graphql": "^16.14.2"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext" /* Essential for modern Node.js + Vitest ESM resolution */,
+    "moduleResolution": "NodeNext",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ] /* DOM added to support our upcoming React admin features */,
+    "types": ["node"] /* Ensures global node types are recognized */,
+
+    /* File Layout */
+    "rootDir": "./" /* Allows matching our root-level tests directory easily */,
+    "outDir": "./dist",
+
+    /* Strict Typechecking Options */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true /* Ensures all code paths in your engine return safely */,
+    "noUnusedLocals": true /* Cleans up dead code automatically */,
+    "noUnusedParameters": true,
+
+    /* Engineering Quality Settings */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "jsx": "react-jsx" /* Ready for our React back-office layout */,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "config/**/*"
+  ] /* Tells TS exactly what domains to watch */,
+  "exclude": ["node_modules", "dist"]
+}
