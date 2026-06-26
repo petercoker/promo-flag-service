@@ -1,0 +1,27 @@
+type TargetingRule {
+  attribute: String!
+  operator: String!
+  values: [String!]!
+}
+
+type FeatureFlag {
+  id: ID!
+  key: String!
+  isActive: Boolean!
+  rules: [TargetingRule!]!
+  fallbackValue: Boolean!
+}
+
+type Query {
+  evaluateFlag(
+    key: String!
+    storeId: String!
+    userSegment: String!
+    deviceType: String!
+  ): Boolean!
+  getFlagDetails(key: String!): FeatureFlag
+}
+
+type Mutation {
+  toggleFlag(key: String!, isActive: Boolean!): FeatureFlag!
+}
