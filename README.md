@@ -1,4 +1,3 @@
-
 # promo-flag-service
 
 ```text
