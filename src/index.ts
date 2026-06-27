@@ -24,11 +24,8 @@ async function bootstrap(): Promise<void> {
     await FlagRepository.findByKey("promo-black-friday");
     console.log("[Bootstrap] Repository initialized with default flags");
 
-    // Start Apollo Server and get the standalone HTTP handler
-    await server.start();
-    console.log("[Bootstrap] Apollo Server started successfully");
-
     // Create standalone HTTP server using Apollo's built-in handler
+    // Note: startStandaloneServer handles server.start() internally
     const { startStandaloneServer } = await import("@apollo/server/standalone");
 
     const { url } = await startStandaloneServer(server, {
