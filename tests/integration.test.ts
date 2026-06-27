@@ -45,8 +45,8 @@ describe("Feature Flag API Integration", () => {
   describe("evaluateFlag query", () => {
     it("returns true when context matches targeting rules", async () => {
       const query = `
-        query EvaluateFlag($key: String!, $storeId: String!, $userSegment: String!, $deviceType: String!) {
-          evaluateFlag(key: $key, storeId: $storeId, userSegment: $userSegment, deviceType: $deviceType)
+        query EvaluateFlag($key: String!, $context: EvaluationContextInput!) {
+          evaluateFlag(key: $key, context: $context)
         }
       `;
 
@@ -55,9 +55,11 @@ describe("Feature Flag API Integration", () => {
         query,
         variables: {
           key: "promo-black-friday",
-          storeId: "BCN-01",
-          userSegment: "premium",
-          deviceType: "mobile",
+          context: {
+            storeId: "BCN-01",
+            userSegment: "premium",
+            deviceType: "mobile",
+          },
         },
       });
 
@@ -67,8 +69,8 @@ describe("Feature Flag API Integration", () => {
 
     it("returns false when context does not match targeting rules", async () => {
       const query = `
-        query EvaluateFlag($key: String!, $storeId: String!, $userSegment: String!, $deviceType: String!) {
-          evaluateFlag(key: $key, storeId: $storeId, userSegment: $userSegment, deviceType: $deviceType)
+        query EvaluateFlag($key: String!, $context: EvaluationContextInput!) {
+          evaluateFlag(key: $key, context: $context)
         }
       `;
 
@@ -77,9 +79,11 @@ describe("Feature Flag API Integration", () => {
         query,
         variables: {
           key: "promo-black-friday",
-          storeId: "DUB-01",
-          userSegment: "premium",
-          deviceType: "mobile",
+          context: {
+            storeId: "DUB-01",
+            userSegment: "premium",
+            deviceType: "mobile",
+          },
         },
       });
 
@@ -89,8 +93,8 @@ describe("Feature Flag API Integration", () => {
 
     it("increments metrics counter on each evaluation", async () => {
       const query = `
-        query EvaluateFlag($key: String!, $storeId: String!, $userSegment: String!, $deviceType: String!) {
-          evaluateFlag(key: $key, storeId: $storeId, userSegment: $userSegment, deviceType: $deviceType)
+        query EvaluateFlag($key: String!, $context: EvaluationContextInput!) {
+          evaluateFlag(key: $key, context: $context)
         }
       `;
 
@@ -101,9 +105,11 @@ describe("Feature Flag API Integration", () => {
         query,
         variables: {
           key: "promo-black-friday",
-          storeId: "BCN-01",
-          userSegment: "premium",
-          deviceType: "mobile",
+          context: {
+            storeId: "BCN-01",
+            userSegment: "premium",
+            deviceType: "mobile",
+          },
         },
       });
 

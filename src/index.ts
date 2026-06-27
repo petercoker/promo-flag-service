@@ -28,13 +28,25 @@ async function bootstrap(): Promise<void> {
     // Note: startStandaloneServer handles server.start() internally
     const { startStandaloneServer } = await import("@apollo/server/standalone");
 
-    const { url } = await startStandaloneServer(server, {
-      listen: { port: config.port },
-    });
+    try {
+      const { url } = await startStandaloneServer(server, {
+        listen: { port: config.port },
+      });
 
-    console.log(`[Bootstrap] Server listening on port ${config.port}`);
-    console.log(`[Bootstrap] Environment: ${config.env}`);
-    console.log(`[Bootstrap] GraphQL endpoint: ${url}`);
+      console.log(`[Bootstrap] Server listening on port ${config.port}`);
+      console.log(`[Bootstrap] Environment: ${config.env}`);
+      console.log(`[Bootstrap] GraphQL endpoint: ${url}`);
+    } catch (error) {
+      const err = error as Error & { code?: string };
+      if (err.code === "EADDRINUSE") {
+        console.error(`[Bootstrap] ERROR: Port ${config.port} is already in use.`);
+        console.error(`[Bootstrap] Fix: Run "lsof -ti:${config.port} | xargs kill -9" to free the port.`);
+        console.error(`[Bootstrap] Or set a different port: PORT=4001 npm start`);
+      } else {
+        console.error("[Bootstrap] Failed to start server:", err.message);
+      }
+      process.exit(1);
+    }
 
     // Graceful shutdown handling
     const shutdown = async (signal: string) => {

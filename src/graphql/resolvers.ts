@@ -27,7 +27,7 @@ export const resolvers = {
      */
     evaluateFlag: async (
       _: unknown,
-      args: { key: string; storeId: string; userSegment: string; deviceType: string },
+      args: { key: string; context: EvaluationContext },
     ): Promise<boolean> => {
       const flag = await FlagRepository.findByKey(args.key);
 
@@ -37,13 +37,8 @@ export const resolvers = {
         return false;
       }
 
-      const context: EvaluationContext = {
-        storeId: args.storeId,
-        userSegment: args.userSegment,
-        deviceType: args.deviceType,
-      };
-
-      const result = flagEvaluator.evaluate(flag, context);
+      // Pass context directly from input object
+      const result = flagEvaluator.evaluate(flag, args.context);
 
       // Increment metrics for observability
       platformMetrics.incrementEvaluationCounter(args.key, result);

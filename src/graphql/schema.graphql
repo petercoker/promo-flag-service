@@ -1,3 +1,21 @@
+# -----------------------------------------------------------------------------
+# Input Types
+# -----------------------------------------------------------------------------
+
+"""
+Evaluation context for feature flag queries.
+Groups all context parameters into a single extensible input object.
+"""
+input EvaluationContextInput {
+  storeId: String!
+  userSegment: String!
+  deviceType: String!
+}
+
+# -----------------------------------------------------------------------------
+# Object Types
+# -----------------------------------------------------------------------------
+
 type TargetingRule {
   attribute: String!
   operator: String!
@@ -12,16 +30,31 @@ type FeatureFlag {
   fallbackValue: Boolean!
 }
 
+# -----------------------------------------------------------------------------
+# Query Type
+# -----------------------------------------------------------------------------
+
 type Query {
-  evaluateFlag(
-    key: String!
-    storeId: String!
-    userSegment: String!
-    deviceType: String!
-  ): Boolean!
+  """
+  Evaluate a feature flag for the given context.
+  Returns true if the flag is active and context matches targeting rules.
+  """
+  evaluateFlag(key: String!, context: EvaluationContextInput!): Boolean!
+
+  """
+  Fetch full feature flag details by key.
+  """
   getFlagDetails(key: String!): FeatureFlag
 }
 
+# -----------------------------------------------------------------------------
+# Mutation Type
+# -----------------------------------------------------------------------------
+
 type Mutation {
+  """
+  Toggle a feature flag's active state.
+  Publishes a cache invalidation event to downstream consumers.
+  """
   toggleFlag(key: String!, isActive: Boolean!): FeatureFlag!
 }
