@@ -23,7 +23,7 @@ concurrency:
 
 env:
   NODE_VERSION: "22"
-  CACHE_KEY_PREFIX: promo-flag-service
+  CACHE_KEY_PREFIX: promo-flag-service-v2
 
 jobs:
   # ---------------------------------------------------------------------------
