@@ -80,8 +80,8 @@ The GraphQL endpoint will be available at `http://localhost:4000/graphql`
 
 ### Operations
 
-| Operation        | Type     | Description                               |
-| ---------------- | -------- | ----------------------------------------- |
+| Operation          | Type     | Description                               |
+| ------------------ | -------- | ----------------------------------------- |
 | `evaluateFlag`   | Query    | Evaluate a feature flag for given context |
 | `getFlagDetails` | Query    | Fetch full feature flag configuration     |
 | `toggleFlag`     | Mutation | Toggle a flag's active state              |
@@ -266,8 +266,8 @@ npm run test:watch
 
 ### Available Scripts
 
-| Command               | Description                                   |
-| --------------------- | --------------------------------------------- |
+| Command                 | Description                                   |
+| ----------------------- | --------------------------------------------- |
 | `npm run dev`         | Start development server (tsx watch)          |
 | `npm run dev:clean`   | Free port 4000, then start dev server         |
 | `npm start`           | Start production server                       |
@@ -429,7 +429,7 @@ Check for detailed error messages:
 
 ---
 
-## 📊 Discussion Points
+## 📊 Discussion Pointis context:  translate to Spanish from Spain speaking as a local Spanish man and break down the sentence so I could learn also context of the translation: s
 
 ### System Design
 
